@@ -69,9 +69,8 @@ class GameDetails extends PureComponent {
               <h1 className="h1">Game #{game.id}</h1>
               <p className="instructionsList">Status: {game.status} </p>
               <ul className="instructionsList">
-                <li>There are seven hidden Simpson's related words</li>
-                <li>Click on their first letter </li>{" "}
-                <li>May the fastest player win </li>
+                <li>There are seven Simpson's related words- you will ONLY need to click on the first letter of each of them</li>{" "}
+                <li>The player who clicks all of the words in the fastest time wins </li>
               </ul>
             </div>
           )}
@@ -86,7 +85,7 @@ class GameDetails extends PureComponent {
               {/* <div className="instructions"> */}
               <h1 className="h1">Game #{game.id}</h1>
               <h1 className="instructionsList">Winner: User {winner.userId}</h1>
-              <p className="instructionsList">Status: {game.status} </p>
+              {/* <p className="instructionsList">Status: {game.status} </p> */}
               {/* </div> */}
               <img
                 className="gif"
@@ -97,7 +96,7 @@ class GameDetails extends PureComponent {
 
           {game.status === "pending" &&
             game.players.map(p => p.userId).indexOf(userId) === -1 && (
-              <button onClick={this.joinGame}>Join Game</button>
+              <button className="JoinButton" onClick={this.joinGame}>Join     Game</button>
             )}
 
           <hr />
