@@ -21,12 +21,3 @@ export default ({board, makeMove}) => board.map((cells, rowIndex) =>
     {cells.map((symbol, cellIndex) => renderCel(makeMove, rowIndex, cellIndex,symbol,false))}
   </div>
 )
-// export default ({board, makeMove}) => board.map((cells, rowIndex) => {
-//   <div key={rowIndex}>
-//     {
-//       cells.map((symbol, cellIndex) => {
-//         renderCel(makeMove, rowIndex, cellIndex,symbol,false)
-//       })
-//     }
-//   </div>
-// })

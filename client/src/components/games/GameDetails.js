@@ -20,27 +20,13 @@ class GameDetails extends PureComponent {
   joinGame = () => this.props.joinGame(this.props.game.id);
 
   makeMove = (toRow, toCell) => {
-    console.log("toRow test:", toRow);
-    console.log("toCell test:", toCell);
+   
 
     const { game, updateGame } = this.props;
 
     const isCorrect = game.words.some(word => {
       return word.row === toRow && word.column === toCell;
     });
-
-    // if (isCorrect === true) {
-    //   return isHighlighted
-    // } else {
-    //   return false
-    // }
-
-    console.log("isCorrect test:", isCorrect);
-
-    // const board = game.board;
-
-    console.log("game test:", game);
-    console.log("words test:", game.words);
 
     updateGame(game.id, [toRow, toCell]);
   };
@@ -56,8 +42,8 @@ class GameDetails extends PureComponent {
     const player = game.players.find(p => p.userId === userId);
 
     const winner = game.players.find(p => p.winner === true);
-    // .filter(p => p.symbol === game.winner)
-    // .map(p => p.userId)[0]
+    const winnerName = winner && Object.values(users).find(u => u.id === winner.userId)
+    console.log('winnerName', winnerName)
 
     console.log("winner", winner);
 
@@ -75,18 +61,17 @@ class GameDetails extends PureComponent {
             </div>
           )}
 
-          {winner && (
+          {winner && winnerName &&(
             <Animated
               className="winner"
               animationIn="tada"
               animationOut="fadeOut"
               isVisible={true}
             >
-              {/* <div className="instructions"> */}
+              
               <h1 className="h1">Game #{game.id}</h1>
-              <h1 className="instructionsList">Winner: User {winner.userId}</h1>
-              {/* <p className="instructionsList">Status: {game.status} </p> */}
-              {/* </div> */}
+              <h1 className="instructionsList">{winnerName.firstName} is the winner</h1>
+              
               <img
                 className="gif"
                 src="https://media.giphy.com/media/l0G18ZtB6c6PJjmlW/giphy.gif"
@@ -126,7 +111,10 @@ const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
   userId: state.currentUser && userId(state.currentUser.jwt),
   game: state.games && state.games[props.match.params.id],
-  users: state.users
+  users: state.users 
+  // === null
+  // ? null
+  // : Object.values(state.users).sort((a, b) => b.id - a.id)
 });
 
 const mapDispatchToProps = {
