@@ -48,6 +48,9 @@ export class Player extends BaseEntity {
   @Column("integer", { name: "user_id" })
   userId: number;
 
+//  @Column("text", { name: "user_first_name" })
+//   userFirstName: string;
+
   @ManyToMany(() => Word, { eager: true })
   @JoinTable()
   words: Word[];
